@@ -54,11 +54,11 @@ countryList.innerHTML = result;
 }
 
 };
-const listCountry = (list) => list.reduce ((acc,item) => acc+countryMarkup (item), '');
+const listCountry = (list) => list.reduce ((acc,item) => acc + countryMarkup (item), '');
 
-const countryMarkup = (({name,flags}) => {
+const countryMarkup = (({name, flags}) => {
     return `<li class='country-item'>
-    <img src='${flags.svg}' alt='flag${name}'width='60' height='40'> ${name}</li>`
+    <img src='${flags.svg}' alt='flag${name}' width = '60' height = '40'> ${name}</li>`
 });
 
 const countryInfoMarkup = (country) => {
