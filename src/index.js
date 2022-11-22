@@ -35,22 +35,21 @@ notFound()
 
 const  insertContent = (countries) => {
 
+if (countries.length > 10) {
+    Notiflix.Notify.info ('Too many matches found. Please enter a more specific name.');
+}
+    
+if (countries.length < 10 && countries.length > 1) {
+const result = listCountry (countries);
+
+countryList.innerHTML = result;
+    
+} 
 
 if (countries.length === 1){
    
     const resultInfo = countryInfoMarkup (countries);
     countryInfo.insertAdjacentHTML ('beforeend', resultInfo)
-    
-} else if (countries.length < 10 && countries.length > 1) {
-const result = listCountry (countries);
-
-countryList.innerHTML = result;
-    
-} else if (countries.length > 10) {
-    Notiflix.Notify.info ('Too many matches found. Please enter a more specific name.');
- 
-} else {
-    Notiflix.Notify.failure ('Unknow Error');
 }
 
 };
@@ -58,16 +57,20 @@ const listCountry = (list) => list.reduce ((acc,item) => acc + countryMarkup (it
 
 const countryMarkup = (({name, flags}) => {
     return `<li class='country-item'>
-    <img src='${flags.svg}' alt='flag${name}' width = '60' height = '40'> ${name}</li>`
+    <img src='${flags.svg}' alt='flag${name.official}' width = '60' height = '40'> ${name.official}</li>`
 });
 
-const countryInfoMarkup = (country) => {
-    const {capital,population,languages} = country[0];
-    const language = languages.map(list => list.name).join(' ');
-        const info = `<p class="country-info__text"><span>Capital:</span>${capital}</p>
+
+
+
+const countryInfoMarkup = countrys => {
+    // const {capital,population,languages} = country[0];
+    return countrys
+        .map(({ capital, population, languages}) =>
+        `<p class="country-info__text"><span>Capital:</span>${capital}</p>
         <p class="country-info__text"><span>Population:</span>${population}</p>
-        <p class="country-info__text"><span>Languages:</span>${language}</p>`;
-      return info;
+        <p class="country-info__text"><span>Languages:${Object.values(languages).join(', ')} </span></p>`)
+
 };
 const notFound = () => {
     Notiflix.Notify.failure('Oops, there is no country with that name')
