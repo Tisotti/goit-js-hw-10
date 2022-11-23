@@ -65,7 +65,7 @@ const countryMarkup = (({name, flags}) => {
 const countryInfoMarkup = countrys => {
     return countrys
         .map(({  name, capital, population, flags, languages}) =>
-        `<img class="country-item__flag" src="${flags.svg}" alt="Flag of ${name.official}" width=40 ${name.official}>
+        `<img class="country-item__flag" src="${flags.svg}" alt="Flag of ${name.official}" width=100 ${name.official}>
         <ul class="country-info__list">
         <p class="country-info__text"><span>Capital: </span>${capital}</p>
         <p class="country-info__text"><span>Population: </span>${population}</p>
